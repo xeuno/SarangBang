@@ -1,0 +1,10 @@
+@import "reset.css";
+@import "footer.css";
+@import "header.css";
+
+/*section*/
+@import "layout_writing.css";
+
+* {
+    font-family: 'Jua', sans-serif; /*전체 페이지에 Jua 폰트 적용*/
+}

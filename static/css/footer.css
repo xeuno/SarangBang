@@ -1,0 +1,16 @@
+#footer {
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    background:#a8deff;
+}
+.footerwrap {
+    display:flex;
+    justify-content:center;
+}
+.footerwrap p {
+    font-size:30px;
+    font-weight:900;
+    line-height:160px;
+}
