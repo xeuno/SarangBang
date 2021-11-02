@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>사랑방 | 글 작성하기</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Jua', sans-serif; /*전체 페이지에 Jua 폰트 적용*/
+        }
+
+        .wrapper {
+            width: 1300px;
+            margin: 0 auto;
+        }
+        .addImage {
+            width: 400px;
+            height: 300px;
+            background-color: lightgray;
+            border-radius: 20px 20px / 20px 20px;
+            overflow: hidden;
+            margin: 0px 10px 10px 0px;
+        }
+
+        .inputImg {
+            width: 450px;
+            height: 350px;
+            float: left;
+        }
+
+        .cafeInfo {
+            height: 350px;
+            width: 1300px;
+        }
+
+        .inputCafeInfo {
+            height: 30px;
+            width: 700px;
+            border-left-width:0px;
+            border-right-width:0px;
+            border-top-width:0px;
+            border-bottom-width:3px;
+            outline: none;
+            font-size: 30px;
+        }
+
+        .local-selector {
+            margin-top: 10px;
+            height: 40px;
+            width: 120px;
+            font-size: 20px;
+            border: 3px solid black;
+            border-radius: 10px 10px / 10px 10px;
+        }
+
+        .save-btn {
+            height: 40px;
+            width: 120px;
+        }
+
+        .cafe-textarea {
+            width: 1300px;
+            height: 500px;
+        }
+    </style>
+
+    <script>
+        function loadFile(input) {
+            let file = input.files[0]; // 선택된 파일 가져오기
+
+            var newImage = document.createElement("img"); //새 이미지 추가
+            newImage.setAttribute("class", 'img');
+
+            //이미지 source 가져오기
+            newImage.src = URL.createObjectURL(file);
+
+            newImage.style.width = "100%";
+            newImage.style.height = "100%";
+            newImage.style.objectFit = "cover";
+
+            //이미지를 image-show div에 추가
+            var container = document.getElementById('image-show');
+            container.appendChild(newImage);
+
+        }
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <form class="inputImg" method="post" enctype="multipart/form-data"> <!-- 이미지 파일 데이터에 알맞는 enctype 설정 -->
+        <div class = "addImage" id = "image-show"> <!-- 이미지 띄울 공간 -->
+        </div>
+        <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
+    </form>
+    <div class="cafeInfo">
+        <select class = "local-selector" name="local">
+            <option value="">지역 선택</option>
+            <option value="서울">서울</option>
+            <option value="경기도">경기도</option>
+            <option value="광주">광주</option>
+            <option value="대전">대전</option>
+            <option value="대구">대구</option>
+            <option value="부산">부산</option>
+            <option value="인천">인천</option>
+            <option value="강원도">강원도</option>
+            <option value="경상북도">경상북도</option>
+            <option value="경상남도">경상남도</option>
+            <option value="전라북도">전라북도</option>
+            <option value="전라남도">전라남도</option>
+            <option value="충청북도">충청북도</option>
+            <option value="강원도">강원도</option>
+        </select>
+        <button class="save-btn">저장하기</button>
+        <h1>카페 이름: <input class = "inputCafeInfo" type="text" id="cafeName"></h1>
+        <h1>카페 주소: <input class = "inputCafeInfo" type="text" id="cafeAddress"></h1>
+    </div>
+    <div class="cafe-textarea">
+        <textarea cols="175" rows="20"></textarea>
+    </div>
+</div>
+</body>
+</html>
