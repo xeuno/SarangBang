@@ -16,7 +16,7 @@ def layout_writing():
     return render_template('layout_writing.html')
 
 # 저장하기(POST) API
-@app.route('/writing', methods=['POST'])
+@app.route('/api/writing', methods=['POST'])
 def save_order():
     # 클라이언트로 부터 정보 넘겨받기
     cafe_name = request.form['cafe_name']

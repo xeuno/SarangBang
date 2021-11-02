@@ -3,6 +3,10 @@
     margin: 0 auto;
 }
 
+.cafe-n-a {
+    font-size: 30px;
+}
+
 .addImage {
     width: 400px;
     height: 300px;
@@ -32,6 +36,7 @@
     border-bottom-width: 3px;
     outline: none;
     font-size: 30px;
+    margin-top: 30px;
 }
 
 .local-selector {
