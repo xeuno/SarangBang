@@ -1,11 +1,18 @@
 function imgToBase64ByFileReader(url) {
-    let reader = new FileReader();
-    reader.onloadend = function () {
-        console.log(reader.result)
-        resolve(reader.result);
-        console.log(reader.result)
-        document.getElementById('img-id').setAttribute('src', reader.result);
-    }
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = () => {
+            let reader = new FileReader();
+            reader.onloadend = function () {
+                resolve(reader.result);
+                document.getElementById('img-id').setAttribute('src', reader.result);
+            }
+            reader.readAsDataURL(xhr.response);
+        }
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+    });
 }
 
 function loadFile(input) {

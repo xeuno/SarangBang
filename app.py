@@ -6,7 +6,7 @@ from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.cafes
 
-## HTML 화면 보여주기
+# HTML 화면 보여주기
 @app.route('/')
 def homework():
     return render_template('layout.html')
