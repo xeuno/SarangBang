@@ -17,9 +17,7 @@
     <!-- 자바스크립트 -->
 {#    <script defer src="{{ url_for('static', filename='js/index.js') }}"></script>#}
 
-    {% if title %}
-    <title>{{ title }}</title>
-    {% endif %}
+    <title>{% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% endblock %}

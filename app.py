@@ -34,5 +34,11 @@ def save_order():
 
     return jsonify({'msg': '저장되었습니다.'})  # 저장 완료됨을 알림
 
+# 서버에서 이미지를 가져오는 부분
+# @app.route('/api/imgdown', methods=['GET'])
+# def image_download():
+#     data = list(db.cafelist.find({}, {'_id': False}))
+#     return jsonify({'downimg': data})
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
