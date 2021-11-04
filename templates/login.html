@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
+
+{% block title %}사랑방 | 로그인{% endblock %}
+
+{% block section %}
+<div class="wrap">
+    <section class="sct sct1">
+        <div class="bx_img">
+            <img src="../static/img/logo.png" alt="사랑방로고">
+        </div>
+    </section><!--sct1-->
+
+    <section class="sct sct2">
+        <div class="login_form">
+            <form class="login_form">
+                <label for="user_id">ID:<input type="text" id="user_id"></label>
+
+                <label for="user_pw">PW:<input type="text" id="user_pw" value=""></label>
+
+                <label for="login_ing"><input type="checkbox" id="login_ing">로그인 유지</label>
+
+                <div class="bx_btn">
+                    <button class="go_main" onclick="login_JWT()" type="button">로그인</button>
+                    <button class="go_signup">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </section><!--sct2-->
+</div><!--wrap-->
+{% endblock %}

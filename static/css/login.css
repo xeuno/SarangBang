@@ -1,0 +1,83 @@
+.wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.sct {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sct1 {
+    padding-right: 50px;
+}
+
+.sct1 img {
+    display: block;
+    width: 100%;
+}
+
+/*.sct2 {*/
+/*    border-left: 1px solid #000;*/
+/*}*/
+.sct2 .login_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.login_form label {
+    margin-bottom: 40px;
+}
+
+.sct2 input {
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 157, 245, 0.28);
+    font-size: 20px;
+}
+
+.sct2 input#login_ing {
+    margin: 0 10px 0 0;
+}
+
+.sct2 input:focus {
+    outline: none;
+    border: 1px solid #f50000;
+}
+
+.bx_btn {
+    disply: flex;
+    justify-content: space-between;
+
+}
+
+.bx_btn button {
+    padding: 15px;
+    font-size: 40px;
+    border: 1px solid #a8deff;
+    border-radius: 10px;
+}
+
+.bx_btn .go_main {
+    color: #8464DD;
+    background: #fff;
+}
+
+.bx_btn .go_main:hover {
+    color: #fff;
+    background: #8464DD;
+}
+
+.bx_btn .go_signup {
+    color: #fff;
+    background: #8464DD;
+}
+
+.bx_btn .go_signup:hover {
+    color: #8464DD;
+    background: #fff;
+}

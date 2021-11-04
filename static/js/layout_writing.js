@@ -53,7 +53,7 @@ function writing() {
             type: "POST",
             url: "/api/writing",
             data: {
-                writer_name: "yse09@kakao.com",
+                writer_name: "yse09@kakao.com", // 꼭 로그인 쿠키에서 username가져와서 바꿔주기!!!!!!
                 cafe_name: $('#cafeName').val(),
                 cafe_address: $('#cafeAddress').val(),
                 cafe_coment: $('#cafeComent').val(),
@@ -61,7 +61,7 @@ function writing() {
             },
             success: function (response) {
                 alert(response["msg"]);
-                window.location.replace('/'); //메인 페이지로 리다이렉트
+                window.location.replace('/postlist'); //메인 페이지로 리다이렉트
             }
         })
     } else {

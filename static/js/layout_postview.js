@@ -4,14 +4,41 @@
 //4. 타임스템프기능
 const rootDiv = document.getElementById("userment-list");
 const mainCommentCount = document.querySelector('#count');
+let user_id = "";
 
 $(document).ready(function () {
     const url = new URL(window.location.href);
     const urlParams = url.searchParams;
     let data = urlParams.get('postname');
 
-    showPost(data);
+    user_id = getCurrentUserID(); //현재 접속해있는 유저의 아이디 값 가져오기
+
+    showPost(data); // 포스트 띄우기
 });
+
+function getCookie(name) {
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value ? value[2] : null;
+}
+
+function getCurrentUserID() {
+    let token = getCookie("mytoken"); //토큰을 보내서 현재 접속한 아이디 알아오기
+
+    $.ajax({
+        type: "POST",
+        url: "/api/getid",
+        data: {
+            token: token
+        },
+        success: function (response) {
+            if (response['user_id'] !== null) {
+                user_id = response['user_id'];
+            } else {
+                alert(response['msg']);
+            }
+        }
+    });
+}
 
 //카페정보 페이지에 로드
 function showPost(data) {
@@ -29,7 +56,7 @@ function showPost(data) {
             const postAddress = response['downlists']['cafe_address'];
             const postComment = response['downlists']['cafe_coment'];
             const postImage = response['downlists']['cafe_img'];
-            const ments = response['downlists']['user_ment'];
+            const ments = response['downlists']['user_mentlist'];
 
             document.getElementById('writer-show').append(writer_name);
             document.getElementById('name-show').append(postName);
@@ -42,11 +69,12 @@ function showPost(data) {
 }
 
 function showDBMents(ment_list) {
+    mainCommentCount.innerText = ment_list.length; // 댓글 개수 반영
+
     for (let i = 0; i < ment_list.length; i++) {
         const userName = document.createElement('div');
         const inputValue = document.createElement('span');
         const showTime = document.createElement('div');
-        const countSpan = document.createElement('span')
         const commentList = document.createElement('div');  //댓글 하나를 감싸고 있는 div, 이걸 삭제하면 댓글 전체가 안보임!
 
         //삭제버튼 만들기
@@ -59,15 +87,14 @@ function showDBMents(ment_list) {
         showTime.className = "time";
 
         //유저네임가져오기
-        userName.innerText = ment_list[i]['writer_name'];
+        userName.innerText = ment_list[i]['user_name'];
         userName.appendChild(delBtn);
 
         //입력값 넘기기
         inputValue.innerText = ment_list[i]['ment'];
 
         //타임스템프찍기
-        showTime.innerText =  ment_list[i]['date'];
-        countSpan.innerText = 0;
+        showTime.innerText = ment_list[i]['date'];
 
         //댓글뿌려주기
         commentList.appendChild(userName);
@@ -104,13 +131,15 @@ function deleteComments(event) {
 }
 
 function saveUserMent() {
-    let writer_name = document.getElementById('writer-show').innerText;
+    let writer_name = document.getElementById('writer-show').innerText; // 글 작성자 아이디
     let cafe_name = document.getElementById('name-show').innerText;
     let user_ment_dict = {}
-    user_ment_dict['writer_name'] = document.getElementsByClassName('name')[0].innerText.split("\n")[0];
+
+    user_ment_dict['user_name'] = user_id; // 현재 댓글 작성자 아이디..헷갈림 주의
     user_ment_dict['ment'] = document.getElementsByClassName('inputValue')[0].innerText;
     user_ment_dict['date'] = document.getElementsByClassName('time')[0].innerText;
 
+    console.log(user_ment_dict);
     $.ajax({
         type: "POST",
         url: "/api/userment",
@@ -128,7 +157,8 @@ function delUserMent(obj) {
     let writer_name = document.getElementById('writer-show').innerText;
     let cafe_name = document.getElementById('name-show').innerText;
     let user_ment_dict = {}
-    user_ment_dict['writer_name'] = obj.getElementsByClassName('name')[0].innerText.replace('삭제', "");
+
+    user_ment_dict['user_name'] = obj.getElementsByClassName('name')[0].innerText.replace('삭제', "");
     user_ment_dict['ment'] = obj.getElementsByClassName('inputValue')[0].innerText;
     user_ment_dict['date'] = obj.getElementsByClassName('time')[0].innerText;
 
@@ -165,7 +195,7 @@ function showComment(comment) {
     showTime.className = "time";
 
     //유저네임가져오기
-    userName.innerText = "Seo****"
+    userName.innerText = user_id;//사용자 이름 표시
     userName.appendChild(delBtn);
 
     //입력값 넘기기

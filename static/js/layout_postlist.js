@@ -16,11 +16,20 @@ function post_filter() {
     }
 }
 
+function getCookie(name) {
+  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return value? value[2] : null;
+}
+
 function send_postData(obj) {
     let writerName = obj.getElementsByTagName("small")[0].innerText.split(" ")[1];
     let postName = obj.getElementsByTagName("h2")[0].innerText;
 
     sessionStorage.setItem(postName, writerName);
+
+    let token = getCookie("mytoken");
+    $.cookie('mytoken', token, {path: '/postview'});
+
     location.href = "postview?" + "postname=" + postName;
 }
 
