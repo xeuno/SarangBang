@@ -27,9 +27,8 @@ function login_JWT() {
         },
         success: function (response) {
             if (response['result'] === 'success') {
-                $.cookie('mytoken', response['token'], {path: '/'});
-                //$.cookie('mytoken', response['token'], {path: '/postlist'});
-                window.location.replace("/postlist")
+                $.cookie('mytoken', response['token']);
+                window.location.replace("/")
             } else {
                 alert(response['msg'])
             }

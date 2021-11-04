@@ -7,8 +7,11 @@
         </h1>
 
         <ul class="gnb_list">
-            <li><a href="">로그아웃</a></li>
+            <li><a href="" onclick="logout()">로그아웃</a></li>
             <li><a href="/writing">글 쓰기</a></li>
         </ul>
     </div><!--nav-->
 </header>
+{% block head %}
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

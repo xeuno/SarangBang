@@ -16,20 +16,11 @@ $(document).ready(function () {
     showPost(data); // 포스트 띄우기
 });
 
-function getCookie(name) {
-    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-    return value ? value[2] : null;
-}
-
 function getCurrentUserID() {
-    let token = getCookie("mytoken"); //토큰을 보내서 현재 접속한 아이디 알아오기
-
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/api/getid",
-        data: {
-            token: token
-        },
+        data: {},
         success: function (response) {
             if (response['user_id'] !== null) {
                 user_id = response['user_id'];
@@ -139,7 +130,6 @@ function saveUserMent() {
     user_ment_dict['ment'] = document.getElementsByClassName('inputValue')[0].innerText;
     user_ment_dict['date'] = document.getElementsByClassName('time')[0].innerText;
 
-    console.log(user_ment_dict);
     $.ajax({
         type: "POST",
         url: "/api/userment",
@@ -161,8 +151,6 @@ function delUserMent(obj) {
     user_ment_dict['user_name'] = obj.getElementsByClassName('name')[0].innerText.replace('삭제', "");
     user_ment_dict['ment'] = obj.getElementsByClassName('inputValue')[0].innerText;
     user_ment_dict['date'] = obj.getElementsByClassName('time')[0].innerText;
-
-    console.log(user_ment_dict);
 
     $.ajax({
         type: "POST",

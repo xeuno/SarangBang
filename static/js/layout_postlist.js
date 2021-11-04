@@ -26,10 +26,6 @@ function send_postData(obj) {
     let postName = obj.getElementsByTagName("h2")[0].innerText;
 
     sessionStorage.setItem(postName, writerName);
-
-    let token = getCookie("mytoken");
-    $.cookie('mytoken', token, {path: '/postview'});
-
     location.href = "postview?" + "postname=" + postName;
 }
 
