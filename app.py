@@ -5,11 +5,11 @@ from datetime import datetime, timedelta
 from pymongo import MongoClient
 import json, jwt
 
+# 우분투에서 사용하는 DB
 # client = MongoClient('mongodb://test:test@localhost', 27017)
 client = MongoClient('localhost', 27017)
 db = client.cafes
 SECRET_KEY = "SARANGBANG"
-
 
 # 메인 화면 - 토큰 기한이 남아있으면 바로 글 목록 페이지로 이동
 @app.route('/')
@@ -101,6 +101,8 @@ def sign_in():
     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
     if result is not None:
+        # 우분투에서 사용하는 return
+        # return jsonify({'result': 'success', 'token': token.decode('utf-8')})
         return jsonify({'result': 'success', 'token': token})
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
