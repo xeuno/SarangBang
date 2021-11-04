@@ -5,7 +5,7 @@ function imgToBase64ByFileReader(url) {
             let reader = new FileReader();
             reader.onloadend = function () {
                 resolve(reader.result);
-                document.getElementById('img-id').setAttribute('src', reader.result);
+                document.getElementById('cafe-image').setAttribute('src', reader.result);
             }
             reader.readAsDataURL(xhr.response);
         }
@@ -20,7 +20,7 @@ function loadFile(input) {
 
     let newImage = document.createElement("img"); //새 이미지 추가
     newImage.src = URL.createObjectURL(file); //이미지 source 가져오기
-    newImage.id = "img-id"
+    newImage.id = "cafe-image"
     newImage.style.width = "100%";
     newImage.style.height = "100%";
     newImage.style.objectFit = "cover";
@@ -30,11 +30,11 @@ function loadFile(input) {
     container.appendChild(newImage);
 
     //이미지를 서버에 저장하기 위해 base64 형태로 변환
-    imgToBase64ByFileReader(document.getElementById('img-id').getAttribute("src"));
+    imgToBase64ByFileReader(document.getElementById('cafe-image').getAttribute("src"));
 }
 
 function checkwrite() { // 글 저장을 위한 예외처리
-    if ($('#img-id').attr("src") == "") {
+    if ($('#cafe-image').attr("src") == "") {
         return false;
     } else if ($('#cafeName').val() == "") {
         return false;
@@ -53,10 +53,11 @@ function writing() {
             type: "POST",
             url: "/api/writing",
             data: {
+                writer_name: "yse09@kakao.com",
                 cafe_name: $('#cafeName').val(),
                 cafe_address: $('#cafeAddress').val(),
                 cafe_coment: $('#cafeComent').val(),
-                cafe_img: $('#img-id').attr("src")
+                cafe_img: $('#cafe-image').attr("src")
             },
             success: function (response) {
                 alert(response["msg"]);
@@ -66,25 +67,4 @@ function writing() {
     } else {
         alert("사진, 이름, 주소, 코멘트를 빠짐없이 작성해 주세요."); //예외 사항을 사용자에게 알림
     }
-}
-
-// 서버에서 받아온 이미지를 띄우는 함수
-function download_img() {
-    $.ajax({
-        type: "GET",
-        url: "/api/imgdown",
-        data: {},
-        success: function (response) { // 성공하면
-            let dwnImg = response['downimg'];
-            for (let i = 0; i < dwnImg.length; i++) {
-                // 새 이미지 만들기
-                let newImage = document.createElement("img");
-                newImage.src = dwnImg[i]['cafe_img'];
-
-                // div에 새 이미지 추가
-                let container = document.getElementById('addimg');
-                container.appendChild(newImage);
-            }
-        }
-    })
 }

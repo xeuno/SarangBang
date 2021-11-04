@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}사랑방 | PostVeiw{% endblock %}
+
+{% block section %}
+<div class="wrapper">
+    <div style="display: flex;">
+        <img class="addImage" id="image-show">
+        <div class="writingInfo">
+            <h1 id="writer-show" class="title-address">작성자 ID : </h1>
+            <h1 id="name-show" class="title-address">카페 이름 : </h1>
+            <h1 id="address-show" class="title-address">카페 주소 : </h1>
+        </div>
+    </div>
+    <div class="cafe-text" id="text-show"></div>
+    <div id="userment-form">
+        <div id="userment-count">댓글 <span id="count"> 0 </span></div>
+        <input id="userment-input" placeholder="댓글을 입력해 주세요.">
+        <button id="userment-submit" onclick="pressBtn()">등 록</button>
+    </div>
+    <div id="userment-list" style="margin-top: 10px;">
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/layout_postview.js') }}"></script>
+{% endblock %}

@@ -1,50 +1,42 @@
 {% extends "layout.html" %}
 {% block head %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/layout_writing.js') }}"></script>
+{{ super() }}
+<script src="{{ url_for('static', filename='js/layout_writing.js') }}"></script>
 {% endblock %}
 
 {% block title %}SarangBang | 글 작성{% endblock %}
 
 {% block section %}
-    <div class="wrapper">
-        <form class="inputImg" method="post" enctype="multipart/form-data"> <!-- 이미지 파일 데이터에 알맞는 enctype 설정 -->
-            <div class="addImage" id="image-show"> <!-- 이미지 띄울 공간 -->
-            </div>
-            <input type="file" id="file-id" name="file_path" accept="image/*" onchange="loadFile(this)">
-        </form>
-        <div class="cafeInfo">
-            <select class="local-selector" name="local">
-                <option value="">지역 선택</option>
-                <option value="서울">서울</option>
-                <option value="경기도">경기도</option>
-                <option value="광주">광주</option>
-                <option value="대전">대전</option>
-                <option value="대구">대구</option>
-                <option value="부산">부산</option>
-                <option value="인천">인천</option>
-                <option value="강원도">강원도</option>
-                <option value="경상북도">경상북도</option>
-                <option value="경상남도">경상남도</option>
-                <option value="전라북도">전라북도</option>
-                <option value="전라남도">전라남도</option>
-                <option value="충청북도">충청북도</option>
-                <option value="강원도">강원도</option>
-            </select>
-            <button class="save-btn" onclick="writing()" type="button">저장하기</button>
-            <h1 class="cafe-n-a">카페 이름: <input class="inputCafeInfo" type="text" id="cafeName"></h1>
-            <h1 class="cafe-n-a">카페 주소: <input class="inputCafeInfo" type="text" id="cafeAddress"></h1>
+<div class="wrapper">
+    <form class="cafeImg-form" method="post" enctype="multipart/form-data"> <!-- 이미지 파일 데이터에 알맞는 enctype 설정 -->
+        <div class="image-show" id="image-show"> <!-- 이미지 띄울 공간 -->
         </div>
-        <div class="cafe-textarea-div">
-            <textarea class="cafe-textarea" id="cafeComent"></textarea>
-        </div>
+        <input type="file" accept="image/*" onchange="loadFile(this)">
+    </form>
+    <div class="cafeInfo">
+        <select class="local-selector" name="local">
+            <option value="">지역 선택</option>
+            <option value="서울">서울</option>
+            <option value="경기도">경기도</option>
+            <option value="광주">광주</option>
+            <option value="대전">대전</option>
+            <option value="대구">대구</option>
+            <option value="부산">부산</option>
+            <option value="인천">인천</option>
+            <option value="강원도">강원도</option>
+            <option value="경상북도">경상북도</option>
+            <option value="경상남도">경상남도</option>
+            <option value="전라북도">전라북도</option>
+            <option value="전라남도">전라남도</option>
+            <option value="충청북도">충청북도</option>
+            <option value="강원도">강원도</option>
+        </select>
+        <button class="save-btn" onclick="writing()" type="button">저장하기</button>
+        <h1 class="cafe-n-a">카페 이름: <input class="inputCafeInfo" type="text" id="cafeName"></h1>
+        <h1 class="cafe-n-a">카페 주소: <input class="inputCafeInfo" type="text" id="cafeAddress"></h1>
     </div>
-
-<!--서버에서 이미지를 가져와서 띄울 공간-->
-<!--    <div id="addimg">-->
-<!--        <button onclick="download_img()" , type="button">이미지 다운</button>-->
-<!--    </div>-->
+    <div class="cafe-textarea-div">
+        <textarea class="cafe-textarea" id="cafeComent"></textarea>
+    </div>
+</div>
 {% endblock %}
-
-</body>
-</html>
