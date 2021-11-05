@@ -1,8 +1,4 @@
 {% extends "layout.html" %}
-{% block head %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
-{% endblock %}
 
 {% block title %}사랑방 | 로그인{% endblock %}
 
@@ -29,4 +25,5 @@
             </div>
         </section><!--sct2-->
     </div><!--wrap-->
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 {% endblock %}

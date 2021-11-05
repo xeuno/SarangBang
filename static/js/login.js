@@ -1,3 +1,4 @@
+//로그인 페이지에서 배너에 로그아웃, 글쓰기 버튼 숨기기
 window.addEventListener('load', function () {
     let login_page = '/login';
     let now_href = location.pathname;
@@ -9,6 +10,7 @@ window.addEventListener('load', function () {
     }
 });
 
+//토큰정보 얻어오기
 function login_JWT() {
     let id_input = document.querySelector('#user_id').value;
     let pw_input = document.querySelector('#user_pw').value;
@@ -39,15 +41,18 @@ function login_JWT() {
 
 }
 
+//로그아웃 시, 쿠키삭제, 로그인 페이지로 이동
 function logout() {
     $.removeCookie('mytoken');
     window.location.href = '/login';
 }
 
+//회원가입 페이지로 이동
 function join_membership() {
     window.location.href = '/joinMembership';
 }
 
+//로그인 버튼 엔터 이벤트 감지하면 로그인 되게!
 let go_writing = document.querySelector('.go_main');
 go_writing.addEventListener('keydown', function (e) {
     if (e.keyCode === 13) {

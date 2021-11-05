@@ -3,8 +3,8 @@
 @import "header.css";
 
 /*section*/
-/*@import "layout_writing.css";*/
-/*@import "layout_postview.css";*/
+@import "writing.css";
+@import "postview.css";
 @import "postlist.css";
 @import "login.css";
 @import "join_membership.css";
