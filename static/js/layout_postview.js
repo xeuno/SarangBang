@@ -67,11 +67,8 @@ function showDBMents(ment_list) {
         const inputValue = document.createElement('span');
         const showTime = document.createElement('div');
         const commentList = document.createElement('div');  //댓글 하나를 감싸고 있는 div, 이걸 삭제하면 댓글 전체가 안보임!
-
-        //삭제버튼 만들기
         const delBtn = document.createElement('button');
-        delBtn.className = "deleteComment";
-        delBtn.innerText = "삭제";
+
         commentList.className = "eachComment";
         userName.className = "name";
         inputValue.className = "inputValue";
@@ -79,7 +76,12 @@ function showDBMents(ment_list) {
 
         //유저네임가져오기
         userName.innerText = ment_list[i]['user_name'];
-        userName.appendChild(delBtn);
+
+        if (userName.innerText === user_id) {
+            delBtn.className = "deleteComment";
+            delBtn.innerText = "삭제";
+            userName.appendChild(delBtn);
+        }
 
         //입력값 넘기기
         inputValue.innerText = ment_list[i]['ment'];
