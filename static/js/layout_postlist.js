@@ -62,3 +62,11 @@ function download_post() {
         }
     })
 }
+
+let search_enter = document.querySelector('.searchBtn');
+search_enter.addEventListener('keydown', function (e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        post_filter();
+    }
+});

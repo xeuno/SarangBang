@@ -1,3 +1,14 @@
+window.addEventListener('load', function () {
+    let login_page = '/writing';
+    let now_href = location.pathname;
+    let hide_gnb = document.querySelector('.gnb_list');
+    let logo_center = document.querySelector('.nav');
+    if (now_href === login_page) {
+        hide_gnb.style.display = 'none';
+        logo_center.style.justifyContent = 'center';
+    }
+});
+
 function imgToBase64ByFileReader(url) {
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();

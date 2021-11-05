@@ -35,6 +35,10 @@ def home():
 def login():
     return render_template('login.html')
 
+# 회원 가입 화면
+@app.route('/joinMembership')
+def joinMembership():
+    return render_template('join_membership.html')
 
 # 글 상세 화면
 @app.route('/postview')
@@ -197,6 +201,32 @@ def delete_userment():
                            {'$set': {'user_mentlist': new_mentlists}})
 
     return jsonify({'msg': '댓글이 저장되었습니다.'})
+
+
+# 회원가입 하기
+@app.route('/signup', methods=['POST'])
+def signUp():
+    user_id = request.form['user_id']
+    user_password = request.form['user_password']
+    print(user_id, user_password)
+    # db에 저장
+
+    doc = {
+        'id': user_id,
+        'pw': user_password
+    }
+    db.userdb.insert_one(doc)
+    return jsonify({'msg': '회원가입이 완료되었습니다.'})
+
+
+# 아이디 중복 확인
+@app.route('/check_dup', methods=['POST'])
+def check_dup():
+    check_id = request.form['check_id']
+    if db.userdb.find_one({'id':check_id}) is None:
+        return jsonify({'msg' : "사용 가능한 아이디 입니다."})
+    else:
+        return jsonify({'exists':"이미 존재하는 아이디 입니다."})
 
 
 if __name__ == '__main__':

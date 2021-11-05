@@ -12,12 +12,13 @@ window.addEventListener('load', function () {
 function login_JWT() {
     let id_input = document.querySelector('#user_id').value;
     let pw_input = document.querySelector('#user_pw').value;
+
     if (id_input === "") {
         alert('아이디를 입력해 주세요')
-    }
-    if (pw_input === "") {
+    } else if (pw_input === "") {
         alert('비밀번호를 입력해 주세요')
     }
+
     $.ajax({
         type: "POST",
         url: "/api/login",
@@ -27,16 +28,30 @@ function login_JWT() {
         },
         success: function (response) {
             if (response['result'] === 'success') {
-                $.cookie('mytoken', response['token']);
+                $.cookie("mytoken", response['token']);
                 window.location.replace("/")
             } else {
                 alert(response['msg'])
             }
+
         }
     });
+
 }
 
 function logout() {
     $.removeCookie('mytoken');
-    window.location.href = '/login'
+    window.location.href = '/login';
 }
+
+function join_membership() {
+    window.location.href = '/joinMembership';
+}
+
+let go_writing = document.querySelector('.go_main');
+go_writing.addEventListener('keydown', function (e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        login_JWT();
+    }
+});

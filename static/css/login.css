@@ -1,4 +1,6 @@
 .wrap {
+    width: 1300px;/*수정*/
+    margin: 0 auto;/*수정*/
     display: flex;
     justify-content: center;
 }
@@ -9,13 +11,13 @@
     align-items: center;
 }
 
-.sct1 {
-    padding-right: 50px;
-}
+/*.sct1 {*/
+/*    padding-right: 50px;*/
+/*}*/
 
 .sct1 img {
     display: block;
-    width: 100%;
+    width: 80%; /*수정*/
 }
 
 /*.sct2 {*/
@@ -30,6 +32,10 @@
 
 .login_form label {
     margin-bottom: 40px;
+}
+
+.login_form #user_id {
+    margin-left: 14px;
 }
 
 .sct2 input {
@@ -54,6 +60,7 @@
     justify-content: space-between;
 
 }
+
 
 .bx_btn button {
     padding: 15px;
