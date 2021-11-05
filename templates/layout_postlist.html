@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}사랑방 | 글 목록{% endblock %}
+
+{% block section %}
+<div class="wrapper_postlist">
+    <!-- 배너 이미지 -->
+    <div class="bannerImgBox" style="text-align : center;">
+        <img class="bannerImg" src="../../static/img/banner.png">
+    </div>
+
+    <!-- 검색 창 -->
+    <div class="searchBox">
+        <input class="searchInput" type="text" id="search" placeholder="카페명을 검색하세요."/>
+        <button class="searchBtn" type="button" onclick="post_filter()">검색</button>
+    </div>
+
+    <!-- 글 목록 나타낼 공간 -->
+    <div class="card-list" id="card-list">
+        {% for one_post in postdata %}
+            <div class="card-box">
+                <div class="card">
+                    <img class="card-image" src={{ one_post.cafe_img }}>
+                    <div class="text" style="margin: 10px">
+                        <small>작성자: {{ one_post.writer_name }}</small>
+                        <h2 class="cafe-title">이름: {{ one_post.cafe_name }}</h2>
+                        <h3 class="cafe-coment">{{ one_post.cafe_coment }}</h3>
+                        <small>주소: {{ one_post.cafe_address }}</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/layout_postlist.js') }}"></script>
+{% endblock %}
