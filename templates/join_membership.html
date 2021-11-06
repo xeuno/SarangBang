@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block section %}
+    <div class="wrap">
+        <!--login 페이지와 동일하게 이미지 삽입-->
+        <section class="sct sct1">
+            <div class="bx_img">
+                <img src="../../static/img/logo.png" alt="사랑방로고">
+            </div>
+        </section>
+        <div class="text_box">
+
+            <form class="form-box"> <!--action으로 데이터를 어디로 보낼건지 정해준다 method는 post로!!-->
+
+                <fieldset class="join"> <!--깔끔하게 묶어주기 위해 사용-->
+                    <legend class="legends">회원가입</legend>
+                    <table class="line">
+                        <tr>
+                            <td width="30%" class="box1">ID:</td>
+
+                            <td><input type="text" name="user_id" id="id" placeholder="ID"></td>
+                            <td>
+                                <button type="button" onclick="check_id()" id="checkID">중복 확인</button>
+                        </tr>
+                        <tr class="idCheck">
+                            <td></td>
+                            <td class="idCheck"><span id="idCheck"></span></td>
+                        </tr>
+                        <tr>
+                            <td width="30%" class="box2">Password:</td>
+                            <td><input type="password" name="user_password" id="pw" placeholder="Password"
+                                       onchange="check_pw()"></td>
+                            <!--input type을 password로 하면 **로 표시가 된다.-->
+                        </tr>
+                        <tr>
+                            <td width="30%" class="box3">PW Check:</td>
+                            <td><input type="password" id="pw2" placeholder="Password"
+                                       onchange="check_pw()">&nbsp;<span
+                                    id="check"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset> <!--깔끔하게 묶어주기 위해 사용-->
+
+
+            </form>
+            <p class="signUp">
+                <button id="joinBox" onclick="signup()" type="button">가입하기</button>
+            </p>
+        </div>
+
+    </div>
+    <script src="{{ url_for('static', filename='js/join_membership.js') }}"></script>
+{% endblock %}
+
+
