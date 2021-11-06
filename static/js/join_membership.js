@@ -1,5 +1,6 @@
 let id_check_result = null;
 
+//배너에 있는 글쓰기, 로그아웃 버튼을 안보이게 하는 부분
 window.addEventListener('load', function () {
     let sign_page = '/joinMembership';
     let now_href = location.pathname;
@@ -11,6 +12,7 @@ window.addEventListener('load', function () {
     }
 });
 
+//비밀번호 형식이 맞는지 검사하는 함수
 function check_pw() {
     var pw = document.getElementById('pw').value;
 
@@ -45,6 +47,7 @@ function check_id_format(result) {
     return regExp.test(result);
 }
 
+//아이디 중복확인 검사하는 함수, 중복확인 버튼 클릭 시 호출.
 function check_id() {
     const inputID = $('#id').val();
 
@@ -82,6 +85,7 @@ function check_id() {
     }
 }
 
+//회원가입 버튼을 눌렀을 때 호출하는 함수.
 function signup() {
     let user_id = $('#id').val();
     let user_password = $('#pw').val();

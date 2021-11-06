@@ -1,7 +1,3 @@
-//1.입력받으면 입력값 초기화
-//2. 입력값 댓글로들어가기
-//3. 댓글 삭제, 수정기능
-//4. 타임스템프기능
 const rootDiv = document.getElementById("userment-list");
 const mainCommentCount = document.querySelector('#count');
 let user_id = "";
@@ -10,6 +6,7 @@ $(document).ready(function () {
     user_id = getCurrentUserID(); //현재 접속해있는 유저의 아이디 값 가져오기
 });
 
+// 현재 접속한 유저 ID를 댓글에 나타내기 위해
 function getCurrentUserID() {
     $.ajax({
         type: "GET",
@@ -33,6 +30,7 @@ function generateTime() {
     return dateToString
 }
 
+//댓글 지울 때 상세 페이지의 댓글 총 갯수 카운트 -1 하는 함수
 function deleteComments(event) {
     const list = event.parentNode.parentNode;
 
@@ -47,6 +45,7 @@ function deleteComments(event) {
     delUserMent(list); //DB에서 댓글 지우기
 }
 
+//댓글 DB에 저장하는 함수
 function saveUserMent() {
     let writer_name = document.getElementById('writer-show').innerText; // 글 작성자 아이디
     let cafe_name = document.getElementById('name-show').innerText;
@@ -64,11 +63,11 @@ function saveUserMent() {
             cafe_name: cafe_name,
             ment: JSON.stringify(user_ment_dict)
         },
-        success: function (response) {
-        }
+        success: function (response) {}
     })
 }
 
+//DB에서 댓글을 삭제하는 함수
 function delUserMent(obj) {
     let writer_name = document.getElementById('writer-show').innerText;
     let cafe_name = document.getElementById('name-show').innerText;
@@ -87,8 +86,7 @@ function delUserMent(obj) {
             cafe_name: cafe_name,
             ment: JSON.stringify(user_ment_dict)
         },
-        success: function (response) {
-        }
+        success: function (response) {}
     })
 }
 
@@ -129,7 +127,7 @@ function showComment(comment) {
 
     delBtn.addEventListener("click", ()=>{deleteComments(delBtn)});
 
-    saveUserMent();
+    saveUserMent(); //DB에 댓글 저장하기
 }
 
 //버튼만들기+입력값 전달
@@ -140,7 +138,7 @@ function pressBtn() {
         alert("댓글을 입력해주세요!!");
     } else {
         showComment(currentVal.value);
-        mainCommentCount.innerText = parseInt(mainCommentCount.innerText) + 1;
+        mainCommentCount.innerText = parseInt(mainCommentCount.innerText) + 1; // 전체 댓글 개수 + 1 해주기
         currentVal.value = null;
     }
 }

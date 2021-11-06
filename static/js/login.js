@@ -1,4 +1,4 @@
-//로그인 페이지에서 배너에 로그아웃, 글쓰기 버튼 숨기기
+//로그인 페이지에서 헤더에 로그아웃, 글쓰기 버튼 숨기기
 window.addEventListener('load', function () {
     let login_page = '/login';
     let now_href = location.pathname;
