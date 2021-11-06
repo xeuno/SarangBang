@@ -4,8 +4,8 @@
 
 ---
 
+<br>
 <h3 align="center"><b>🛠 Tech Stack 🛠</b></h3>
-</br>
 <p align="center">
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white">
@@ -20,16 +20,20 @@
 <img src="https://img.shields.io/badge/Jinja-7952B3?style=for-the-badge&logo=Jinja&logoColor=white">
 <img src="https://img.shields.io/badge/MongoDB-61DAFB?style=for-the-badge&logo=MongoDB&logoColor=white">
 
+<br><br>
 <h3 align="center"><b>🎬 Getting Started 🎬</b></h3>
 <pre>
 <code>
 ~$ cd sarangbang
+~$ sudo chmod 755 initail_ec2.sh
+~$ ./initial_ec2.sh
 ~$ pip install flask
 ~$ pip install mongo
 ~$ python3 app.py
 </code>
 </pre>
 
+<br>
 <h3 align="center"><b>📂 Project Directory Structure 📁</b></h3>
 <pre>
 <code>
@@ -72,6 +76,7 @@
 ---
 
 <h3 align="center"><b>📢 Main function 📢</b></h3>
+<br>
 <h4 align="center"><b>📰 Login Page 📰</b></h4>
 
 <table width="100%">
@@ -83,6 +88,7 @@
 
 ---
 
+<br>
 <h4 align="center"><b>📰 Join Membership Page 📰</b></h4>
 
 <table width="100%">
@@ -94,6 +100,7 @@
 
 ---
 
+<br>
 <h4 align="center"><b>📰 Post Section Page 📰</b></h4>
 
 <table width="100%">
@@ -105,6 +112,7 @@
 
 ---
 
+<br>
 <h4 align="center"><b>📰 Post Writing Page 📰</b></h4>
 <table width="100%">
     <tr>
@@ -119,6 +127,7 @@
 
 ---
 
+<br>
 <h4 align="center"><b>📰 Post Detail Page 📰</b></h4>
 
 <table width="100%">
@@ -131,6 +140,7 @@
 ---
 
 <h4 align="center"><b>👨🏻‍🤝‍👨🏻 Members 👨🏻‍🤝‍👨🏻</b></h4>
+<br>
 <table>
     <tr>
         <td align="center">
@@ -170,4 +180,35 @@
 
 ---
 
-<h4 align="center"><b>✏ Review ✏</b></h4>
+<h4 align="center"><b>✏ Trouble Shooting ✏</b></h4>
+<br>
+<details>
+    <summary>
+        <b>header.html에 로그아웃, 글쓰기 메뉴를 포함하여 렌더링 해서 로그인, 회원가입 페이지에서도 로그아웃, 글쓰기 메뉴가 보이는 문제</b>
+    </summary>
+<br>    해결: 페이지 로드 시 href 값 비교를 통해 로그인, 회원가입 페이지라면 해당 태그를 display:none으로 설정해 안보이게 함.
+
+```html
+    <!-- File: "../templates/layout_section/header.html" -->
+    <ul class="gnb_list">
+        <li><a href="" onclick="logout()">로그아웃</a></li>
+        <li><a href="/writing">글 쓰기</a></li>
+    </ul>
+
+```
+
+```javascript
+    //해결 File: "../static/js/login.js"
+    window.addEventListener('load', function () {
+        let login_page = '/login'; //로그인 페이지 경로 -> 로그아웃 페이지에서 적용할 시, '/joinMembership'으로 설정하면 됨
+        let now_href = location.pathname; //현재 페이지 경로
+        let hide_gnb = document.querySelector('.gnb_list');
+        let logo_center = document.querySelector('.nav');
+        if (now_href === login_page) { //만약 현재 경로가 로그인 페이지 경로라면
+            hide_gnb.style.display = 'none'; //안보이게 설정하기
+            logo_center.style.justifyContent = 'center';
+        }
+    });
+```
+
+</details>
