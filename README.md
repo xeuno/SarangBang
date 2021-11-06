@@ -24,6 +24,8 @@
 <pre>
 <code>
 ~$ cd sarangbang
+~$ sudo chmod 755 initail_ec2.sh
+~$ ./initial_ec2.sh
 ~$ pip install flask
 ~$ pip install mongo
 ~$ python3 app.py
