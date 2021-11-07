@@ -50,7 +50,7 @@ function download_post() {
                                             <div class="text" style="margin: 10px">
                                                 <small>작성자: ${writer_name}</small>
                                                 <h2 class="cafe-title">이름: ${cafe_name}</h2>
-                                                <h3>${cafe_coment}</h3>
+                                                <h3 class="cafe-coment">${cafe_coment}</h3>
                                                 <small>주소: ${cafe_address}</small>
                                             </div>
                                         </div>

@@ -57,3 +57,13 @@
     height: 300px;
     object-fit: cover;
 }
+
+.cafe-title{
+    font-size : 20px;
+    margin: 20px 0px 10px 0px;
+}
+
+.cafe-coment {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
