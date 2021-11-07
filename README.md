@@ -1,6 +1,16 @@
 <h3 align="center"><b>항해99 1주차 4팀, 사랑방(SarangBang)</b></h3>
 
 <h4 align="center">📆 2021.11.01 ~ 2021.11.06</h4>
+<br>
+
+---
+
+<h3><b>🎫 프로젝트 소개 🎫</b></h3>
+나만 알고 있기 아까운 우리 동네 예쁜 카페들을 자랑하고 서로 구경함으로써 내가 모르는 동네에 갔을 때도 쉽게 카페를 찾을 수 있도록 공유하는 플랫폼 입니다.
+<br><br> 
+
+<h3><b>🎞 프로젝트 시연영상 🎞</b></h3>
+https://www.youtube.com/watch?v=3dvFevnA8_c&t=22s
 
 ---
 
@@ -72,74 +82,219 @@
 ├── /app.py
 </code>
 </pre>
+<br>
 
 ---
 
 <h3 align="center"><b>📢 Main function 📢</b></h3>
 <br>
-<h4 align="center"><b>📰 Login Page 📰</b></h4>
+<h4><b>📰 Login Page 📰</b></h4>
 
 <table width="100%">
     <tr>
-        <td width="60%"><img src="https://user-images.githubusercontent.com/57797592/140597056-2d5732ee-1d16-4d5e-963c-53534021a238.PNG" /></td>
-        <td width="40%">JWT 방식을 사용하여 로그인 기능을 구현하였습니다.</td>
+        <td width="50%"><img src="https://user-images.githubusercontent.com/57797592/140597056-2d5732ee-1d16-4d5e-963c-53534021a238.PNG" /></td>
+        <td width="50%">
+            <h5>로그인</h5>
+            <ul>
+                <li>JWT 방식으로 구현</li>
+                <li>회원가입 버튼 클릭 시 회원가입 페이지로 이동</li>
+            </ul>
+        </td>
     </tr>
 </table>
 
 ---
 
 <br>
-<h4 align="center"><b>📰 Join Membership Page 📰</b></h4>
+<h4><b>📰 Join Membership Page 📰</b></h4>
 
 <table width="100%">
     <tr>
-        <td width="60%"><img src="https://user-images.githubusercontent.com/57797592/140597087-27822dce-c3f2-4326-8dd0-b11d09d2c24f.PNG" /></td>
-        <td width="40%">회원가입을 할 수 있는 페이지 입니다.</td>
+        <td width="50%"><img src="https://user-images.githubusercontent.com/57797592/140597087-27822dce-c3f2-4326-8dd0-b11d09d2c24f.PNG" /></td>
+        <td width="50%">
+            <h5>회원가입</h5>
+            <ul>
+                <li>아이디 중복확인 시 아이디 입력여부, 형식, 중복 아이디 체크</li>
+                <li>아이디 형식 : 영문과 숫자, 일부 특수문자(._-) 사용 가능. 4-10자</li>                
+                <li>비밀번호 2번 입력으로 비밀번호 형식, 일치 여부 체크</li>
+                <li>비밀번호 형식 : 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자</li>
+            </ul>
+        </td>
     </tr>
 </table>
 
 ---
 
 <br>
-<h4 align="center"><b>📰 Post Section Page 📰</b></h4>
+<h4><b>📰 Post Section Page 📰</b></h4>
 
 <table width="100%">
     <tr>
-        <td width="60%"><img src="https://user-images.githubusercontent.com/57797592/140597095-ac455453-77c1-41db-a4a0-b6ad829fc549.PNG" /></td>
-        <td width="40%">- 작성된 글 목록을 볼 수 있습니다! 글 목록은 Jinja 서버 사이드 렌더링으로 구현하여 빠른 페이지 로딩이 가능합니다. <br>- 포스트를 클릭하면 상세페이지로 이동할 수 있습니다. <br>- 헤더 부분의 로그아웃 버튼을 누르면 로그아웃이 가능합니다. <br>- 헤더 부분의 글쓰기 버튼을 누르면 글쓰기 페이지로 이동합니다. <br>- 검색란에 카페의 이름을 검색하면 해당하는 카페의 포스트를 볼 수 있습니다.</td>
+        <td width="50%"><img src="https://user-images.githubusercontent.com/57797592/140597095-ac455453-77c1-41db-a4a0-b6ad829fc549.PNG" /></td>
+        <td width="50%">
+            <h5>메인 화면</h5>
+            <ul>
+                <li>User들이 작성한 글들을 보여주는 페이지, Jinja를 이용한 서버 사이드 렌더링으로 구현</li>
+                <li>로그아웃 버튼 클릭 시, 로그인 페이지로 이동</li>
+                <li>글쓰기 버튼 클릭 시, 글 쓰기 페이지로 이동</li>
+                <li>검색 란에 카페 이름 검색 시, 키워드와 일치하는 카페 포스트만 보여줌</li>
+                <li>포스트 클릭 시, 해당 포스트의 상세페이지로 이동</li>
+            </ul>
+        </td>
     </tr>
 </table>
 
 ---
 
 <br>
-<h4 align="center"><b>📰 Post Writing Page 📰</b></h4>
+<h4><b>📰 Post Writing Page 📰</b></h4>
 <table width="100%">
     <tr>
-        <td width="60%"><img src="https://user-images.githubusercontent.com/57797592/140597459-bb706ace-85ed-49a0-8016-70dc9bf70e4f.PNG" /></td>
-        <td width="40%">- 파일 선택 버튼을 누르면 내 컴퓨터에 있는 이미지 파일을 로드할 수 있습니다. <br>- 카페 이름, 주소, 코멘트를 작성할 수 있습니다. <br>- 저장하기 버튼 클릭 시, DB에 글이 저장됩니다. 모든 입력란이 채워지지 않으면 글을 저장할 수 없습니다.</td>
+        <td width="50%"><img src="https://user-images.githubusercontent.com/57797592/140597459-bb706ace-85ed-49a0-8016-70dc9bf70e4f.PNG" /></td>
+        <td width="50%">
+            <h5>글쓰기 화면</h5>
+            <ul>
+                <li>파일 선택 버튼 클릭 시, 내 컴퓨터의 이미지 로드 가능</li>
+                <li>카페 이름, 주소, 코멘트를 작성할 수 있는 입력란</li>
+                <li>저장 버튼 클릭 시, DB에 해당 글이 저장</li>
+                <li>저장 조건 - 모든 입력란을 기입하여야 함</li>
+            </ul>
+        </td>
     </tr>
     <tr>
-        <td width="60%"><img src="https://user-images.githubusercontent.com/57797592/140597444-bc379eae-a5f2-4f84-bc9f-1b916e753074.PNG" /></td>
-        <td width="40%">다 작성한 후 페이지의 모습입니다.</td>
+        <td width="50%"><img src="https://user-images.githubusercontent.com/57797592/140597444-bc379eae-a5f2-4f84-bc9f-1b916e753074.PNG" /></td>
+        <td width="50%">
+            <h5>글쓰기 화면</h5>
+            <ul>
+                <li>글 작성 후의 모습</li>
+            </ul>
+        </td>
     </tr>
 </table>
 
 ---
 
 <br>
-<h4 align="center"><b>📰 Post Detail Page 📰</b></h4>
+<h4><b>📰 Post Detail Page 📰</b></h4>
 
 <table width="100%">
     <tr>
-        <td width="60%"><img src="https://user-images.githubusercontent.com/57797592/140597172-9e8f76d9-95ed-49c8-8978-c7a29e1edc97.PNG" /></td>
-        <td width="40%">-클릭한 포스트의 정보들을 볼 수 있습니다. <br> - 댓글 작성 기능이 있어 댓글을 달 수 있고, 로그인한 ID로 작성했던 댓글들은 삭제할 수 있습니다. JWT 토큰을 이용해 사용자 검증을 하여 본인이 작성한 댓글에만 삭제 버튼이 보이도록 구현하였습니다.</td>
+        <td width="50%"><img src="https://user-images.githubusercontent.com/57797592/140597172-9e8f76d9-95ed-49c8-8978-c7a29e1edc97.PNG" /></td>
+        <td width="50%">
+            <h5>포스트 상세 화면</h5>
+            <ul>
+                <li>클릭한 포스트의 정보를 볼 수 있음</li>
+                <li>댓글 작성 기능</li>
+                <li>댓글 삭제 기능 - 본인이 작성한 댓글만 삭제 가능</li>
+            </ul>
+        </td>
     </tr>
 </table>
+<br>
 
 ---
 
-<h4 align="center"><b>👨🏻‍🤝‍👨🏻 Members 👨🏻‍🤝‍👨🏻</b></h4>
+<br>
+<h3 align="center"><b>🏷 API Table 🏷</b></h3>
+<table width="100%">
+    <tr align="center">
+	<td width="12%"><b>기능</b></td>
+        <td width="5%"><b>Method</b></td>
+        <td width="12%"><b>URL</b></td>
+        <td width="30%"><b>Request</b></td>
+        <td width="31%"><b>Response</b></td>
+    </tr>
+    <tr>
+        <td width="12%">메인화면 페이지 로드</td>
+        <td width="5%">GET</td>
+        <td width="12%">/</td>
+        <td width="30%"></td>
+        <td width="31%">Token 검증됨 - render_template("layout_postlist.html", postdata=postdata)<br>Token 검증 안됨 - url_for("login", msg="로그인 정보가 존재하지 않습니다.")</td>
+    </tr>
+    <tr>
+        <td width="12%">로그인 페이지 로드</td>
+        <td width="5%">GET</td>
+        <td width="12%">/login</td>
+        <td width="30%">msg</td>
+        <td width="31%">render_template('login.html', msg=msg)</td>
+    </tr>
+    <tr>
+        <td width="12%">회원가입 페이지 로드</td>
+        <td width="5%">GET</td>
+        <td width="12%">/joinMembership</td>
+        <td width="30%"></td>
+        <td width="31%">render_template('join_membership.html')</td>
+    </tr>
+    <tr>
+        <td width="12%">글쓰기 페이지 로드</td>
+        <td width="5%">GET</td>
+        <td width="12%">/writing</td>
+        <td width="30%"></td>
+        <td width="31%">Token 검증됨 - render_template('layout_writing.html')<br>Token 검증 안됨 - url_for("login", msg="로그인 정보가 존재하지 않습니다.")</td>
+    </tr>
+    <tr>
+        <td width="12%">회원가입</td>
+        <td width="5%">POST</td>
+        <td width="12%">/signUp</td>
+        <td width="30%">{'id': user_id,  'pw': user_password}</td>
+        <td width="31%">{'msg': '회원가입이 완료되었습니다.'}</td>
+    </tr>
+    <tr>
+        <td width="12%">ID 중복검사</td>
+        <td width="5%">POST</td>
+        <td width="12%">/check_dup</td>
+        <td width="30%">{'id': check_id}</td>
+        <td width="31%">중복 시 - {'msg': "사용 가능한 아이디 입니다."}<br>중복 아닐 시 - {'exists': "이미 존재하는 아이디 입니다."}</td>
+    </tr>
+    <tr>
+        <td width="12%">로그인</td>
+        <td width="5%">POST</td>
+        <td width="12%">/api/login</td>
+        <td width="30%">{'id': username_give, 'pw': password_give}</td>
+        <td width="31%">로그인 성공 - {'result': 'success', 'token': token}<br>로그인 실패 - {'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'}</td>
+    </tr>
+    <tr>
+        <td width="12%">글 저장</td>
+        <td width="5%">POST</td>
+        <td width="12%">/api/writing</td>
+        <td width="30%">{'writer_name': writer_name, 'cafe_name': cafe_name, 'cafe_address': cafe_address, 'cafe_coment': cafe_coment, 'cafe_img': cafe_img, 'user_mentlist': user_mentlist}</td>
+        <td width="31%">Token 검증됨 - {'msg': '저장되었습니다.'}<br>Token 검증 안됨 - url_for("login", msg="로그인 정보가 존재하지 않습니다.")</td>
+    </tr>
+    <tr>
+        <td width="12%">상세 페이지 로드</td>
+        <td width="5%">POST</td>
+        <td width="12%">/<writer_name>/<cafe_name></td>
+        <td width="30%">{'writer_name': writer_name, 'cafe_name': cafe_name}</td>
+        <td width="31%">Token 검증됨 - render_template("layout_postview.html", writer_id=writer_id, cafe_name=cafe_name, cafe_address=cafe_address, cafe_img=cafe_img, cafe_coment=cafe_coment, user_mentlist=user_mentlist, current_user=user_id)<br>Token 검증 안됨 - url_for("login", msg="로그인 정보가 존재하지 않습니다.")</td>
+    </tr>
+    <tr>
+        <td width="12%">댓글 저장</td>
+        <td width="5%">POST</td>
+        <td width="12%">/api/userment</td>
+        <td width="30%">{'writer_name': writer_name, 'cafe_name': cafe_name, 'ment': user_ment_info}</td>
+        <td width="31%">{'msg': '댓글이 저장되었습니다.'}</td>
+    </tr>
+    <tr>
+        <td width="12%">댓글 삭제</td>
+        <td width="5%">POST</td>
+        <td width="12%">/api/delment</td>
+        <td width="30%">{'writer_name': writer_name, 'cafe_name': cafe_name, 'ment': user_ment_info}</td>
+        <td width="31%">{'msg': '댓글이 삭제되었습니다.'}</td>
+    </tr>
+    <tr>
+        <td width="12%">현재 사용자 조회</td>
+        <td width="5%">GET</td>
+        <td width="12%">/api/getid</td>
+        <td width="30%"></td>
+        <td width="31%">Token 검증됨 - {'user_id': user_id}<br>Token 검증 안됨 - url_for("login", msg="로그인 정보가 존재하지 않습니다.")</td>
+    </tr>
+</table>
+
+<br>
+
+---
+
+<h3 align="center"><b>👨🏻‍🤝‍👨🏻 Members 👨🏻‍🤝‍👨🏻</b></h3>
 <br>
 <table>
     <tr>
@@ -177,10 +332,11 @@
         </td>
     </tr>
 </table>
+<br>
 
 ---
 
-<h4 align="center"><b>✏ Trouble Shooting ✏</b></h4>
+<h3 align="center"><b>✏ Trouble Shooting ✏</b></h3>
 <br>
 <details>
     <summary>
