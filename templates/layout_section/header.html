@@ -1,14 +1,17 @@
 <header id="header">
     <div class="nav">
         <h1 class="logo">
-            <a href="/login">
+            <a href="/">
                 <img src="../../static/img/logo.png" alt="사랑방 메인화면 가기" >
             </a>
         </h1>
 
         <ul class="gnb_list">
-            <li><a href="#">로그인</a></li>
+            <li><a href="" onclick="logout()">로그아웃</a></li>
             <li><a href="/writing">글 쓰기</a></li>
         </ul>
     </div><!--nav-->
 </header>
+{% block head %}
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
