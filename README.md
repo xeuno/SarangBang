@@ -184,9 +184,29 @@
 <br>
 <details>
     <summary>
+        <b>js File에서 Element를 제대로 불러오지 못하는 문제</b>
+    </summary>
+    <br>해결 : head에 있던 script를 body 맨 아래 부분으로 위치를 옮김.
+</details>
+
+<details>
+    <summary>
+        <b>button의 onclick 함수가 동작하지 않는 문제</b>
+    </summary>
+  <br><b>해결 : button tag에 type지정을 해준다.</b>
+    
+```html
+    <!-- File : "../templates/join_membership.html" -->
+    <button id="joinBox" onclick="signup()" type="button">가입하기</button>
+```
+
+</details>
+
+<details>
+    <summary>
         <b>header.html에 로그아웃, 글쓰기 메뉴를 포함하여 렌더링 해서 로그인, 회원가입 페이지에서도 로그아웃, 글쓰기 메뉴가 보이는 문제</b>
     </summary>
-<br>    해결: 페이지 로드 시 href 값 비교를 통해 로그인, 회원가입 페이지라면 해당 태그를 display:none으로 설정해 안보이게 함.
+<br><b>해결 : 페이지 로드 시 href 값 비교를 통해 로그인, 회원가입 페이지라면 해당 태그를 display:none으로 설정해 안보이게 함.</b>
 
 ```html
     <!-- File: "../templates/layout_section/header.html" -->
@@ -211,4 +231,291 @@
     });
 ```
 
+</details>
+	
+<details>
+    <summary>
+        <b>로그인 시 받아오는 JWT 토큰을 쿠키에 저장할 때 경로를 지정하여, 지정한 경로 외의 페이지에서는 쿠키를 가져올 수 없는 문제</b>
+    </summary>
+<br><b>해결 : Path설정을 제거해주어 모든 경로에서 쿠키를 가져올 수 있도록 구성함.</b>
+
+```javascript
+    //문제 코드 File : "../static/js/login.js의 login_JWT() 내부"
+    success: function (response) {
+        if (response['result'] === 'success') {
+            $.cookie("mytoken", response['token'], {path: '/'});
+            window.location.replace("/")
+        } else {
+            alert(response['msg'])
+        }
+    }
+```
+
+```javascript
+   //수정하여 해결한 코드     
+   success: function (response) {
+            if (response['result'] === 'success') {
+                $.cookie("mytoken", response['token']);
+                window.location.replace("/")
+            } else {
+                alert(response['msg'])
+            }
+        }
+```
+
+</details>
+
+<details>
+    <summary>
+        <b>input을 이용해 내 컴퓨터에 있는 파일 업로드 시 이미지 경로가 fakePath로 나오는 문제</b>
+    </summary>
+    사용자가 로드한 이미지를 DB에 저장하기 위해 이미지 경로를 python API 서버 쪽으로 넘겨 서버 측에서 파일을 바이너리 형태로 변환하여 저장하려 했으나 fakepath로 인해 파일 경로를 알 수 없었다
+
+```html
+    <!-- File : "../templates/layout_writing.html" -->
+    <form class="cafeImg-form" method="post" enctype="multipart/form-data"> <!-- 이미지 파일 데이터에 알맞는 enctype 설정 -->
+        <div class="image-show" id="image-show"> <!-- 이미지 띄울 공간 --> </div>
+        <input type="file" accept="image/*" onchange="loadFile(this)"> <!-- 이미지 로드함수 호출 -->
+    </form>
+```
+    
+File : "../static/js/layout_writing.js"
+    
+```javascript
+    function loadFile(input) {
+        let file = input.files[0]; //선택된 파일 가져오기
+    
+        let newImage = document.createElement("img"); //새 이미지 추가
+        newImage.src = URL.createObjectURL(file); //이미지 source 가져오기 -> fakePath
+        newImage.id = "cafe-image"
+        newImage.style.width = "100%";
+        newImage.style.height = "100%";
+        newImage.style.objectFit = "cover";
+    
+        //이미지를 image-show div에 추가
+        let container = document.getElementById('image-show');
+        container.appendChild(newImage);
+    }
+```
+
+<br><b>해결 : javascript에서 이미지를 Base64 형태로 인코딩하여 해당 값을 넘기도록 구현</b>
+
+```javascript
+    function loadFile(input) {
+        let file = input.files[0]; //선택된 파일 가져오기
+    
+        let newImage = document.createElement("img"); //새 이미지 추가
+        newImage.src = URL.createObjectURL(file); //이미지 source 가져오기
+        newImage.id = "cafe-image"
+        newImage.style.width = "100%";
+        newImage.style.height = "100%";
+        newImage.style.objectFit = "cover";
+    
+        //이미지를 image-show div에 추가
+        let container = document.getElementById('image-show');
+        container.appendChild(newImage);
+    
+        //이미지를 서버에 저장하기 위해 base64 형태로 변환
+        imgToBase64ByFileReader(document.getElementById('cafe-image').getAttribute("src"));
+    }
+```            
+    
+```javascript
+    function imgToBase64ByFileReader(url) {
+        return new Promise((resolve, reject) => {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = () => {
+                let reader = new FileReader();
+                reader.onloadend = function () {
+                    resolve(reader.result);
+                    document.getElementById('cafe-image').setAttribute('src', reader.result);
+                }
+                reader.readAsDataURL(xhr.response); //Base64형식으로 인코딩
+            }
+            xhr.open('GET', url);
+            xhr.responseType = 'blob';
+            xhr.send();
+        });
+    }
+```
+    
+</details>
+
+<details>
+    <summary>
+        <b>AJAX로 배열을 전송할 때 에러 발생하는 문제</b>
+    </summary>
+<br><b>해결 : javascript에서 이미지를 Base64 형태로 인코딩하여 해당 값을 넘기도록 구현</b>
+<br>배열은 객체에 해당하므로 json방식으로 직렬화해서 보낸 후 받는 쪽에서는 역직렬화를 통해 데이터를 얻을 수 있다.
+<ul>
+    <li><b>serialization 직렬화</b></li>
+    : 객체를 쉽게 옮길 수 있는 형태로 변환하는 과정.
+    <: 직렬화된 객체는 HTTP를 사용해 클라이언트-서버 간 옮길 수 있다.
+    <li><b>deserialization 역직렬화</b></li>
+    : 직렬화와 반대되는 기능, 직렬화된 객체를 재구성한다.
+</ul>
+
+```javascript
+    // File : "../static/js/layout_postview.js"
+    function delUserMent(obj) {
+        let writer_name = document.getElementById('writer-show').innerText;
+        let cafe_name = document.getElementById('name-show').innerText;
+        let user_ment_dict = {} //댓글 정보를 담을 딕셔너리
+
+        user_ment_dict['user_name'] = user_id;
+        user_ment_dict['ment'] = obj.getElementsByClassName('inputValue')[0].innerText;
+        user_ment_dict['date'] = obj.getElementsByClassName('time')[0].innerText;
+
+        $.ajax({
+            type: "POST",
+            url: "/api/delment",
+            data: {
+                writer_name: writer_name,
+                cafe_name: cafe_name,
+                ment: JSON.stringify(user_ment_dict) // JSON으로 직렬화
+            },
+            success: function (response) {}
+        })
+    }
+```
+
+```python
+    # File : ../app.py
+    @app.route('/api/delment', methods=['POST'])
+    def delete_userment():
+        writer_name = request.form['writer_name']
+        cafe_name = request.form['cafe_name']
+        user_ment_info = json.loads(request.form['ment']) # JSON 역직렬화
+    
+        data = db.cafelist.find_one({'writer_name': writer_name[9:], 'cafe_name': cafe_name[8:]}, {'_id': False})
+    
+        new_mentlists = data['user_mentlist']
+        del_index = new_mentlists.index(user_ment_info)
+        del new_mentlists[del_index]
+    
+        db.cafelist.update_one({'writer_name': writer_name[9:], 'cafe_name': cafe_name[8:]},
+                               {'$set': {'user_mentlist': new_mentlists}})
+    
+        return jsonify({'msg': '댓글이 저장되었습니다.'})
+```    
+    
+</details>
+
+<details>
+    <summary>
+        <b>AWS ec2 서버에서 app.py 실행 시, JWT token 전달 시 object of type bytes is not json serializable 에러 발생 문제</b>
+    </summary>
+<br><b>해결 : token.decode('utf-8')을 통해 byte 타입으로 반환된 토큰을 str 형식으로 변환해주기</b>
+<br>같은 코드인데 로컬 호스트에서 실행하는 것과 AWS 서버에서 실행하는 결과가 다른지..-> 구글링해보니 jwt 버전차이라고 한다!!
+    
+```python
+    # File : ../app.py
+    @app.route('/api/login', methods=['POST'])
+    def sign_in():
+        id_receive = request.form['username_give']
+        pw_receive = request.form['password_give']
+        result = db.userdb.find_one({'id': id_receive, 'pw': pw_receive})
+    
+        if result is not None:
+            payload = {
+                'id': id_receive,
+                'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+            }
+            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+            return jsonify({'result': 'success', 'token': token})
+        else:
+            return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+```
+
+</details>
+
+<details>
+    <summary>
+        <b>AJAX POST 요청에서 render_template로 페이지 이동이 안되는 문제 (해결했으나 다른 문제 발생으로 현재는 다른방법으로 구현했음)</b>
+    </summary>
+<br><b>응답 받는 부분에 document.write(response)로 해결</b>
+<br>AJAX로 POST 요청을 보낼 때 요청은 자바스크립트에서 오는 것이고 플라스크의 응답 데이터는 자바 스크립트에 저장된다고 한다. 브라우저 자체에는 직접 보내거나 받는게 없으므로 페이지를 다시 렌더링하지 않는다. 따라서 받는 쪽에서 페이지를 새로 써줌으로써 해결.
+
+```javascript
+    function showPost(data) {
+        let writer_name = sessionStorage.getItem(data);
+
+        $.ajax({
+            type: "POST",
+            url: "/api/postdown",
+            data: {
+                writer_name: writer_name,
+                cafe_name: data
+            },
+            success: function (response) {
+                document.write(response); //페이지 쓰기
+                showDBMents(ments);
+            }
+        });
+    }
+```
+
+</details>
+
+<details>
+    <summary>
+        <b>AJAX POST 요청에서 render_template로 페이지 이동이 안되는 문제 해결 - 2_jinja2를 이용한 경로 변경 및 api 호출</b>
+    </summary>
+  <br><b>해결 : html에서 파이썬 서버쪽으로 서버에서 전달받은 작성자, 글 제목을 경로로 지정하여 호출</b>
+<br>AJAX로 POST 요청을 보낼 때 요청은 자바스크립트에서 오는 것이고 플라스크의 응답 데이터는 자바 스크립트에 저장된다고 한다.
+<br>브라우저 자체에는 직접 보내거나 받는게 없으므로 페이지를 다시 렌더링하지 않는다. 따라서 받는 쪽에서 페이지를 새로 써줌으로써 해결.
+포스트 하나(card-box클래스를 가진 div)를 선택했을 때 서버에서 받은 작성자, 글 제목를 경로로 다시 api 호출
+    
+```html
+    <!-- File : "../templates/layout_postlist.html" -->
+    <!-- 글 목록 나타낼 공간 서버 사이드 렌더링 적용 -->
+    <div class="card-list" id="card-list">
+        {% for one_post in postdata %}
+            <div class="card-box" onclick="location.href='/{{ one_post.writer_name }}/{{ one_post.cafe_name }}'">
+                <div class="card">
+                    <img class="card-image" src={{ one_post.cafe_img }}>
+                    <div class="text" style="margin: 10px">
+                        <small>작성자: {{ one_post.writer_name }}</small>
+                        <h2 class="cafe-title">이름: {{ one_post.cafe_name }}</h2>
+                        <h3 class="cafe-coment">{{ one_post.cafe_coment }}</h3>
+                        <small>주소: {{ one_post.cafe_address }}</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+```
+
+<br>서버 측에서는 해당경로를 변수로 받을 수 있게 구현, 받은 정보에 해당하는 포스트 내용을 다시 rendering해주도록 구현하였다.    
+    
+```python
+    # app.py
+    @app.route('/<writer_name>/<cafe_name>') #html에서 전달해주는 값을 받을 변수..변수를 경로로 지정해놓음으로써 포스트마다 실행될 수 있게 구현
+    def show_clicked_post(writer_name, cafe_name):
+        token_receive = request.cookies.get('mytoken')
+        print(token_receive)
+    
+        try:
+            payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+            user_info = db.userdb.find_one({'id': payload['id']})
+            user_id = user_info['id']
+    
+            data = db.cafelist.find_one({'writer_name': writer_name, 'cafe_name': cafe_name}, {'_id': False})
+            writer_id = data['writer_name']
+            cafe_name = data['cafe_name']
+            cafe_address = data['cafe_address']
+            cafe_img = data['cafe_img']
+            cafe_coment = data['cafe_coment']
+            user_mentlist = data['user_mentlist']
+    
+            return render_template("layout_postview.html",
+                                   writer_id=writer_id,
+                                   cafe_name=cafe_name,
+                                   cafe_address=cafe_address,
+                                   cafe_img=cafe_img,
+                                   cafe_coment=cafe_coment,
+                                   user_mentlist=user_mentlist,
+                                   current_user=user_id)
+```    
+    
 </details>
